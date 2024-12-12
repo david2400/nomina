@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PensionService } from '../services/pension.service';
-import { CreatePensionDto } from '../dto/create-pension.dto';
-import { UpdatePensionDto } from '../dto/update-pension.dto';
+import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common'
+import {PensionService} from '../services/pension.service'
+import {CreatePensionDto} from '../dto/create-pension.dto'
+import {UpdatePensionDto} from '../dto/update-pension.dto'
 
 @Controller('pension')
 export class PensionController {
@@ -9,26 +9,26 @@ export class PensionController {
 
   @Post()
   create(@Body() createPensionDto: CreatePensionDto) {
-    return this.pensionService.create(createPensionDto);
+    return this.pensionService.create(createPensionDto)
   }
 
   @Get()
   findAll() {
-    return this.pensionService.findAll();
+    return this.pensionService.findAll()
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.pensionService.findOne(+id);
+    return this.pensionService.findOne(+id)
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePensionDto: UpdatePensionDto) {
-    return this.pensionService.update(+id, updatePensionDto);
+    return this.pensionService.update(+id, updatePensionDto)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.pensionService.remove(+id);
+    return this.pensionService.remove(+id)
   }
 }

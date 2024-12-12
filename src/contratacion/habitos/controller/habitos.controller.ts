@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { HabitosService } from './habitos.service';
-import { CreateHabitoDto } from './dto/create-habito.dto';
-import { UpdateHabitoDto } from './dto/update-habito.dto';
+import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common'
+import {HabitosService} from '../services/habitos.service'
+import {CreateHabitoDto} from '../dto/create-habito.dto'
+import {UpdateHabitoDto} from '../dto/update-habito.dto'
 
 @Controller('habitos')
 export class HabitosController {
@@ -9,26 +9,26 @@ export class HabitosController {
 
   @Post()
   create(@Body() createHabitoDto: CreateHabitoDto) {
-    return this.habitosService.create(createHabitoDto);
+    return this.habitosService.create(createHabitoDto)
   }
 
   @Get()
   findAll() {
-    return this.habitosService.findAll();
+    return this.habitosService.findAll()
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.habitosService.findOne(+id);
+    return this.habitosService.findOne(+id)
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateHabitoDto: UpdateHabitoDto) {
-    return this.habitosService.update(+id, updateHabitoDto);
+    return this.habitosService.update(+id, updateHabitoDto)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.habitosService.remove(+id);
+    return this.habitosService.remove(+id)
   }
 }

@@ -1,31 +1,45 @@
 import {Module} from '@nestjs/common'
-import {ContratoModule} from './contrato/contrato.module'
+import {ContratosModule} from './contratos/contratos.module'
 import {TipoContratoModule} from './tipo-contrato/tipo-contrato.module'
-import {AspiranteModule} from './aspirante/aspirante.module'
+import {AspirantesModule} from './aspirantes/aspirantes.module'
 import {EntrevistasModule} from './entrevistas/entrevistas.module'
 import {EmpleadosModule} from './empleados/empleados.module'
-import {JornadaModule} from './jornada/jornada.module'
+import {JornadasModule} from './jornadas/jornadas.module'
 import {AntecedentesModule} from './antecedentes/antecedentes.module'
 import {CargosModule} from './cargos/cargos.module'
 import {ReferenciasModule} from './referencias/referencias.module'
-import {EmpresaModule} from './empresa/empresa.module'
 import {HabitosModule} from './habitos/habitos.module'
 import {AreaLaboralModule} from './area-laboral/area-laboral.module'
+import {SubareaModule} from './subarea/subarea.module'
 
 @Module({
   imports: [
-    ContratoModule,
+    ContratosModule,
     TipoContratoModule,
-    AspiranteModule,
+    AspirantesModule,
     EntrevistasModule,
     EmpleadosModule,
-    JornadaModule,
+    JornadasModule,
     AntecedentesModule,
     CargosModule,
     ReferenciasModule,
-    EmpresaModule,
     HabitosModule,
     AreaLaboralModule,
+    SubareaModule,
+  ],
+  exports: [
+    ContratosModule,
+    TipoContratoModule,
+    AspirantesModule,
+    EntrevistasModule,
+    EmpleadosModule,
+    JornadasModule,
+    AntecedentesModule,
+    CargosModule,
+    ReferenciasModule,
+    HabitosModule,
+    AreaLaboralModule,
+    SubareaModule,
   ],
 })
 export class ContratacionModule {}

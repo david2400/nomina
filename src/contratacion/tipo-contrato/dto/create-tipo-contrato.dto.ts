@@ -1,1 +1,3 @@
-export class CreateTipoContratoDto {}
+import {BaseDto} from '@/common/class/base.abstract.dto'
+
+export class CreateTipoContratoDto extends BaseDto {}

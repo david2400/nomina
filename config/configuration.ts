@@ -3,7 +3,7 @@ import type {
   Default,
   Objectype,
   Production,
-} from '@common/interface/config/config.interface'
+} from '@/common/interfaces/config/config.interface'
 
 const util = {
   isObject<T>(value: T): value is T & Objectype {
