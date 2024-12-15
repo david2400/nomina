@@ -7,28 +7,28 @@ import {UpdateVacacioneDto} from '@/src/prestacion-social/vacaciones/dto/update-
 export class VacacionesController {
   constructor(private readonly vacacionesService: VacacionesService) {}
 
-  @Post()
-  create(@Body() createVacacioneDto: CreateVacacioneDto) {
-    return this.vacacionesService.create(createVacacioneDto)
-  }
+  // @Post()
+  // create(@Body() createVacacioneDto: CreateVacacioneDto) {
+  //   return this.vacacionesService.create(createVacacioneDto)
+  // }
 
-  @Get()
-  findAll() {
-    return this.vacacionesService.findAll()
-  }
+  // @Get()
+  // findAll() {
+  //   return this.vacacionesService.findAll()
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.vacacionesService.findOne(+id)
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.vacacionesService.findOne(+id)
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVacacioneDto: UpdateVacacioneDto) {
-    return this.vacacionesService.update(+id, updateVacacioneDto)
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateVacacioneDto: UpdateVacacioneDto) {
+  //   return this.vacacionesService.update(+id, updateVacacioneDto)
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.vacacionesService.remove(+id)
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.vacacionesService.remove(+id)
+  // }
 }

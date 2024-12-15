@@ -8,20 +8,20 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
-  ParseIntPipe,
   ValidationPipe,
+  ParseIntPipe,
 } from '@nestjs/common'
-import {CargosService} from '../services/cargos.service'
-import {CreateCargoDto} from '../dto/create-cargo.dto'
-import {UpdateCargoDto} from '../dto/update-cargo.dto'
 import {ApiOperation, ApiResponse} from '@nestjs/swagger'
 import {UpdateResult} from 'typeorm'
+import {ContratosService} from '../services/contratos.service'
+import {CreateContratoDto} from '../dto/create-contrato.dto'
+import {UpdateContratoDto} from '../dto/update-contrato.dto'
 
-@Controller('cargos')
-export class CargosController {
-  constructor(private readonly cargoService: CargosService) {}
+@Controller('contrato')
+export class ContratosController {
+  constructor(private readonly contratosService: ContratosService) {}
 
-  @ApiOperation({summary: 'Crear cargos laboral'})
+  @ApiOperation({summary: 'Crear contratos'})
   @ApiResponse({
     status: 500,
     description: 'server error',
@@ -29,17 +29,17 @@ export class CargosController {
   @ApiResponse({
     status: 201,
     description: 'success register',
-    type: UpdateCargoDto,
+    type: UpdateContratoDto,
   })
   @HttpCode(HttpStatus.CREATED)
   @Post()
-  async create(@Body(new ValidationPipe()) cargos: CreateCargoDto) {
-    const result = await this.cargoService.createCargo(cargos)
+  async create(@Body(new ValidationPipe()) contratos: CreateContratoDto) {
+    const result = await this.contratosService.createContrato(contratos)
 
     return result
   }
 
-  @ApiOperation({summary: 'Crear cargos laboral'})
+  @ApiOperation({summary: 'Crear contratos'})
   @ApiResponse({
     status: 500,
     description: 'server error',
@@ -55,14 +55,14 @@ export class CargosController {
   @Patch(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body(new ValidationPipe()) cargos: UpdateCargoDto
+    @Body(new ValidationPipe()) contratos: UpdateContratoDto
   ) {
-    const result = await this.cargoService.update(id, cargos)
+    const result = await this.contratosService.update(id, contratos)
 
     return result
   }
 
-  @ApiOperation({summary: 'Eliminar cargos laboral'})
+  @ApiOperation({summary: 'Eliminar contratos'})
   @ApiResponse({
     status: 500,
     description: 'server error',
@@ -78,7 +78,7 @@ export class CargosController {
   @HttpCode(HttpStatus.OK)
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
-    const result = await this.cargoService.delete(id)
+    const result = await this.contratosService.delete(id)
 
     return result
   }
@@ -91,14 +91,14 @@ export class CargosController {
   @ApiResponse({
     status: 200,
     description: 'success register',
-    type: UpdateCargoDto,
+    type: UpdateContratoDto,
   })
   //   @UseGuards(JwtAuthGuard, RolesGuard)
   //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   @Get('restore/:id')
   async restore(@Param('id', ParseIntPipe) id: number) {
-    const result = await this.cargoService.restore(id)
+    const result = await this.contratosService.restore(id)
 
     return result
   }
@@ -111,14 +111,14 @@ export class CargosController {
   @ApiResponse({
     status: 200,
     description: 'success register',
-    type: UpdateCargoDto,
+    type: UpdateContratoDto,
   })
   //   @UseGuards(JwtAuthGuard, RolesGuard)
   //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   @Get()
   async findAll() {
-    const result = await this.cargoService.findAll()
+    const result = await this.contratosService.findAll()
 
     return result
   }
@@ -131,14 +131,14 @@ export class CargosController {
   @ApiResponse({
     status: 200,
     description: 'success register',
-    type: UpdateCargoDto,
+    type: UpdateContratoDto,
   })
   //   @UseGuards(JwtAuthGuard, RolesGuard)
   //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-    const result = await this.cargoService.findOne(id)
+    const result = await this.contratosService.findOne(id)
 
     return result
   }

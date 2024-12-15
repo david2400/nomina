@@ -1,34 +1,145 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common'
-import {PensionService} from '../services/pension.service'
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+  HttpStatus,
+  HttpCode,
+  ValidationPipe,
+} from '@nestjs/common'
+import {ApiOperation, ApiResponse} from '@nestjs/swagger'
+import {UpdateResult} from 'typeorm'
 import {CreatePensionDto} from '../dto/create-pension.dto'
 import {UpdatePensionDto} from '../dto/update-pension.dto'
+import {PensionService} from '../services/pension.service'
 
 @Controller('pension')
 export class PensionController {
   constructor(private readonly pensionService: PensionService) {}
 
+  @ApiOperation({summary: 'Crear pension'})
+  @ApiResponse({
+    status: 500,
+    description: 'server error',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'success register',
+    type: UpdatePensionDto,
+  })
+  @HttpCode(HttpStatus.CREATED)
   @Post()
-  create(@Body() createPensionDto: CreatePensionDto) {
-    return this.pensionService.create(createPensionDto)
+  async create(@Body(new ValidationPipe()) pension: CreatePensionDto) {
+    const result = await this.pensionService.createPension(pension)
+
+    return result
   }
 
-  @Get()
-  findAll() {
-    return this.pensionService.findAll()
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pensionService.findOne(+id)
-  }
-
+  @ApiOperation({summary: 'Crear pension'})
+  @ApiResponse({
+    status: 500,
+    description: 'server error',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'success register',
+    type: UpdateResult,
+  })
+  //   @UseGuards(JwtAuthGuard, RolesGuard)
+  //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
+  @HttpCode(HttpStatus.OK)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePensionDto: UpdatePensionDto) {
-    return this.pensionService.update(+id, updatePensionDto)
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body(new ValidationPipe()) pension: UpdatePensionDto
+  ) {
+    const result = await this.pensionService.update(id, pension)
+
+    return result
   }
 
+  @ApiOperation({summary: 'Eliminar pension'})
+  @ApiResponse({
+    status: 500,
+    description: 'server error',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'success delete',
+    type: UpdateResult,
+  })
+
+  //   @UseGuards(JwtAuthGuard, RolesGuard)
+  //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
+  @HttpCode(HttpStatus.OK)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pensionService.remove(+id)
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    const result = await this.pensionService.delete(id)
+
+    return result
+  }
+
+  @ApiOperation({summary: 'Restaurar pension'})
+  @ApiResponse({
+    status: 500,
+    description: 'server error',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'success register',
+    type: UpdatePensionDto,
+  })
+  //   @UseGuards(JwtAuthGuard, RolesGuard)
+  //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
+  @HttpCode(HttpStatus.OK)
+  @Get('restore/:id')
+  async restore(@Param('id', ParseIntPipe) id: number) {
+    const result = await this.pensionService.restore(id)
+
+    return result
+  }
+
+  @ApiOperation({summary: 'Buscar todos los pension'})
+  @ApiResponse({
+    status: 500,
+    description: 'server error',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'success register',
+    type: UpdatePensionDto,
+  })
+  //   @UseGuards(JwtAuthGuard, RolesGuard)
+  //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
+  @HttpCode(HttpStatus.OK)
+  @Get()
+  async findAll() {
+    const result = await this.pensionService.findAll()
+
+    return result
+  }
+
+  @ApiOperation({summary: 'Buscar aplicacion'})
+  @ApiResponse({
+    status: 500,
+    description: 'server error',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'success register',
+    type: UpdatePensionDto,
+  })
+  //   @UseGuards(JwtAuthGuard, RolesGuard)
+  //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
+  @HttpCode(HttpStatus.OK)
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const result = await this.pensionService.findOne(id)
+
+    return result
   }
 }

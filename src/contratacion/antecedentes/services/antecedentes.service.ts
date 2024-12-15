@@ -1,9 +1,9 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common'
+import {UpdateResult} from 'typeorm'
+import {Antecedente} from '../entities/antecedente.entity'
 import {CreateAntecedenteDto} from '../dto/create-antecedente.dto'
 import {UpdateAntecedenteDto} from '../dto/update-antecedente.dto'
 import {AntecedentesRepository} from '../repository/antecedentes.repository'
-import {UpdateResult} from 'typeorm'
-import {Antecedente} from '../entities/antecedente.entity'
 
 @Injectable()
 export class AntecedentesService {
@@ -12,11 +12,11 @@ export class AntecedentesService {
   async createAntecedentes(antecedentes: CreateAntecedenteDto): Promise<any> {
     // const result = await this.findOneByRolename(antecedentes)
     // if (result.length != 0) {
-    //   throw new HttpException({message: 'The Aplication already registered!'}, HttpStatus.FOUND)
+    //   throw new HttpException({message: 'The antecedentes already registered!'}, HttpStatus.FOUND)
     // }
-    const newPermission = this.antecedentesRepository.create(antecedentes)
+    const newAntecedentes = this.antecedentesRepository.create(antecedentes)
 
-    const results = await this.antecedentesRepository.save(newPermission)
+    const results = await this.antecedentesRepository.save(newAntecedentes)
     return results
   }
 
@@ -24,7 +24,7 @@ export class AntecedentesService {
     const result = await this.antecedentesRepository.softDelete({id: id})
     if (result.affected === 0) {
       throw new HttpException(
-        {message: 'The Aplication does not exist or could not be deleted!'},
+        {message: 'The antecedentes does not exist or could not be deleted!'},
         HttpStatus.NOT_FOUND
       )
     }
@@ -34,9 +34,9 @@ export class AntecedentesService {
 
   async restore(id: number) {
     const result = await this.antecedentesRepository.recover({id: id})
-    if (result.DeleteAt === undefined) {
+    if (result.delete_at === undefined) {
       throw new HttpException(
-        {message: 'The Aplication does not exist or could not be restored!'},
+        {message: 'The antecedentes does not exist or could not be restored!'},
         HttpStatus.NOT_FOUND
       )
     }
@@ -45,13 +45,13 @@ export class AntecedentesService {
   }
 
   async update(id: number, antecedentes: UpdateAntecedenteDto): Promise<UpdateResult> {
-    const newPermission = this.antecedentesRepository.create(antecedentes)
+    const newAntecedentes = this.antecedentesRepository.create(antecedentes)
 
-    const result = await this.antecedentesRepository.update(id, newPermission)
+    const result = await this.antecedentesRepository.update(id, newAntecedentes)
 
     if (result.affected === 0) {
       throw new HttpException(
-        {message: 'The Aplication does not exist or could not be modify!'},
+        {message: 'The antecedentes does not exist or could not be modify!'},
         HttpStatus.NOT_FOUND
       )
     }

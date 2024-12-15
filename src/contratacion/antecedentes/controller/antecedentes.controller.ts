@@ -11,17 +11,17 @@ import {
   ValidationPipe,
   ParseIntPipe,
 } from '@nestjs/common'
-import {AntecedentesService} from '../services/antecedentes.service'
-import {CreateAntecedenteDto} from '../dto/create-antecedente.dto'
-import {UpdateAntecedenteDto} from '../dto/update-antecedente.dto'
 import {ApiOperation, ApiResponse} from '@nestjs/swagger'
 import {UpdateResult} from 'typeorm'
+import {CreateAntecedenteDto} from '../dto/create-antecedente.dto'
+import {UpdateAntecedenteDto} from '../dto/update-antecedente.dto'
+import {AntecedentesService} from '../services/antecedentes.service'
 
 @Controller('antecedentes')
 export class AntecedentesController {
   constructor(private readonly antecedentesService: AntecedentesService) {}
 
-  @ApiOperation({summary: 'Crear aplicaciones para asignar permisos'})
+  @ApiOperation({summary: 'Crear antecedentes penales'})
   @ApiResponse({
     status: 500,
     description: 'server error',
@@ -39,7 +39,7 @@ export class AntecedentesController {
     return result
   }
 
-  @ApiOperation({summary: 'Crear aplicaciones para asignar permisos'})
+  @ApiOperation({summary: 'Crear antecedentes penales'})
   @ApiResponse({
     status: 500,
     description: 'server error',
@@ -62,7 +62,7 @@ export class AntecedentesController {
     return result
   }
 
-  @ApiOperation({summary: 'Eliminar aplicaciones para asignar permisos'})
+  @ApiOperation({summary: 'Eliminar antecedentes penales'})
   @ApiResponse({
     status: 500,
     description: 'server error',
@@ -72,6 +72,7 @@ export class AntecedentesController {
     description: 'success delete',
     type: UpdateResult,
   })
+
   //   @UseGuards(JwtAuthGuard, RolesGuard)
   //   @hasRoles(Role.ESTUDENT, Role.ADMIN)
   @HttpCode(HttpStatus.OK)
